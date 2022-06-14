@@ -409,9 +409,6 @@ function Calendar() {
                       value={all}
                       onChange={() => {
                         allCheck();
-                        alert(
-                          "By unchecking this checkbox they well be anything to filter"
-                        );
                       }}
                     />
                     <label htmlFor="all">All</label>
@@ -423,7 +420,7 @@ function Calendar() {
                       className={calendarStyles.lager}
                       defaultChecked={allCon}
                       value={com}
-                      disabled={allCon}
+                      disabled={!allCon ? false : true}
                       onChange={confirmedCheck}
                     />
                     <div className={calendarStyles.konkonlo}></div>
@@ -437,6 +434,7 @@ function Calendar() {
                       defaultChecked={allCon}
                       value={pen}
                       onChange={pendingCheck}
+                      disabled={!allCon ? false : true}
                     />
                     <div className={calendarStyles.pending}></div>
                     <label htmlFor="Confirmed">Pending (P)</label>
@@ -449,6 +447,7 @@ function Calendar() {
                       defaultChecked={true}
                       value={res}
                       onChange={rescheduledCheck}
+                      disabled={!allCon ? false : true}
                     />
                     <div className={calendarStyles.rescheduled}></div>
                     <label htmlFor="Rescheduled">Rescheduled (R)</label>
@@ -461,6 +460,7 @@ function Calendar() {
                       defaultChecked={true}
                       value={avail}
                       onChange={availableCheck}
+                      disabled={!allCon ? false : true}
                     />
                     <div className={calendarStyles.available}></div>
                     <label htmlFor="Available">Available (A)</label>
@@ -497,6 +497,7 @@ function Calendar() {
                       className={calendarStyles.lager}
                       value={inPerson}
                       onChange={inPersonTypeCheck}
+                      disabled={!allTypeCom ? false : true}
                     />
                     <BsPerson
                       style={{ marginRight: "5px", fontSize: "20px" }}
@@ -511,6 +512,7 @@ function Calendar() {
                       defaultChecked={true}
                       value={phone}
                       onChange={phoneTypeCheck}
+                      disabled={!allTypeCom ? false : true}
                     />
                     <MdSmartphone
                       style={{ marginRight: "5px", fontSize: "20px" }}
@@ -525,6 +527,7 @@ function Calendar() {
                       defaultChecked={true}
                       value={online}
                       onChange={onlineTypeCheck}
+                      disabled={!allTypeCom ? false : true}
                     />
                     <RiComputerLine
                       style={{ marginRight: "5px", fontSize: "20px" }}
@@ -878,5 +881,4 @@ function Calendar() {
     </div>
   );
 }
-
 export default Calendar;
