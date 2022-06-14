@@ -22,8 +22,16 @@ function Calendar() {
   const [res, setRes] = useState("");
   const [availCom, setAvailCom] = useState(false);
   const [avail, setAvail] = useState("");
+  // Type Start
+  const [allTypes, setAllTypes] = useState("");
+  const [allTypeCom, setAllTypeCom] = useState(true);
   const [inPerson, setInPerson] = useState("");
-  const [typeALLCom, setTypeAllCom] = useState(false);
+  const [inPersonCom, setInPersonCom] = useState(false);
+  const [phone, setPhone] = useState("");
+  const [phoneCom, setPhoneCom] = useState(false);
+  const [online, setOnline] = useState("");
+  const [onlineCom, setOnlineCom] = useState(false);
+  // Type End
   const [month, setMonth] = useState(5);
   const [year, setYear] = useState(2022);
   const localDate = new Date();
@@ -134,8 +142,24 @@ function Calendar() {
     }
   };
 
+  const allType = () => {
+    setAllTypeCom(!allTypeCom);
+    if (allTypeCom) {
+      setAllTypes("All");
+      setInPerson("In Person");
+      setPhone("Phone");
+      setOnline("Online");
+    } else {
+      setAllTypes("");
+      setInPerson("");
+      setPhone("");
+      setOnline("");
+    }
+  };
+
   useEffect(() => {
     allCheck();
+    allType();
   }, []);
 
   const confirmedCheck = () => {
@@ -175,13 +199,49 @@ function Calendar() {
   };
 
   const inPersonTypeCheck = () => {
-    setTypeAllCom(!typeALLCom);
-    if (typeALLCom) {
+    setInPersonCom(!inPersonCom);
+    if (inPersonCom) {
       setInPerson("In Person");
     } else {
-      setTypeAllCom("");
+      setInPerson("");
     }
   };
+
+  const phoneTypeCheck = () => {
+    setPhoneCom(!phoneCom);
+    if (phoneCom) {
+      setPhone("Phone");
+    } else {
+      setPhone("");
+    }
+  };
+
+  const onlineTypeCheck = () => {
+    setOnlineCom(!onlineCom);
+    if (onlineCom) {
+      setOnline("Online");
+    } else {
+      setOnline("");
+    }
+  };
+
+  // const phoneTypeCheck = () => {
+  //   setPhoneCom(!phoneCom);
+  //   if (phoneCom) {
+  //     setPhone("Phone");
+  //   } else {
+  //     setPhone("");
+  //   }
+  // };
+
+  // const onlineTypeCheck = () => {
+  //   setOnlineCom(!onlineCom);
+  //   if (onlineCom) {
+  //     setOnline("Online");
+  //   } else {
+  //     setOnline("");
+  //   }
+  // };
 
   function getDaysInMonthUTC(month, year) {
     var date = new Date(Date.UTC(year, month, 1));
@@ -311,7 +371,9 @@ function Calendar() {
                       type="checkbox"
                       name="allMobile"
                       className={calendarStyles.lager}
-                      value="allMobile"
+                      defaultChecked={true}
+                      value={allTypes}
+                      ocChange={allType}
                     />
                     <label htmlFor="allMobile">All</label>
                   </div>
@@ -319,8 +381,10 @@ function Calendar() {
                     <input
                       type="checkbox"
                       name="Inperson"
+                      defaultChecked={true}
                       className={calendarStyles.lager}
-                      value="Inperson"
+                      value={inPerson}
+                      onChange={inPersonTypeCheck}
                     />
                     <BsPerson
                       style={{ marginRight: "5px", fontSize: "20px" }}
@@ -332,7 +396,9 @@ function Calendar() {
                       type="checkbox"
                       name="Phone"
                       className={calendarStyles.lager}
-                      value="Phone"
+                      defaultChecked={true}
+                      value={phone}
+                      onChange={phoneTypeCheck}
                     />
                     <MdSmartphone
                       style={{ marginRight: "5px", fontSize: "20px" }}
@@ -344,7 +410,9 @@ function Calendar() {
                       type="checkbox"
                       name="Online"
                       className={calendarStyles.lager}
-                      value="Online"
+                      defaultChecked={true}
+                      value={online}
+                      onChange={onlineTypeCheck}
                     />
                     <RiComputerLine
                       style={{ marginRight: "5px", fontSize: "20px" }}
@@ -357,6 +425,7 @@ function Calendar() {
             {/* Interview Type End */}
           </div>
         </div>
+        {/* Calendar Start */}
         <div className={calendarStyles.holdBig}>
           <div className={calendarStyles.holdBig2}>
             <div className={calendarStyles.dateNext}>
@@ -528,9 +597,9 @@ function Calendar() {
                             )
                             .filter(
                               (type) =>
-                                type.interviewType === "In Person" ||
-                                type.interviewType === "Phone" ||
-                                type.interviewType === "Online"
+                                type.interviewType === inPerson ||
+                                type.interviewType === phone ||
+                                type.interviewType === online
                             )
                             .map((detail, i) => {
                               if (MonthFor.includes(detail.dataStart)) {
@@ -570,6 +639,7 @@ function Calendar() {
             </div>
           </div>
         </div>
+        {/* Calendar End */}
       </div>
     </div>
   );
