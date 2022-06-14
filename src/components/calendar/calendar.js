@@ -58,42 +58,119 @@ function Calendar() {
       interviewStatus: "Confirmed",
       interviewType: "In Person",
       dataStart: "Jun 12 2022",
-      startTime: "3:00PM",
+      startTime: "3:00",
+    },
+    {
+      eventName: "Available",
+      interviewStatus: "Available",
+      interviewType: "In Person",
+      dataStart: "Jun 02 2022",
+      startTime: "7:00",
     },
     {
       eventName: "Stand Up",
       interviewStatus: "Pending",
       interviewType: "Phone",
       dataStart: "Jun 17 2022",
-      startTime: "3:00PM",
+      startTime: "3:00",
+    },
+    {
+      eventName: "Conference Meeting",
+      interviewStatus: "Pending",
+      interviewType: "Phone",
+      dataStart: "Jun 27 2022",
+      startTime: "3:00",
+    },
+    {
+      eventName: "Conference Chat",
+      interviewStatus: "Pending",
+      interviewType: "Online",
+      dataStart: "Jun 23 2022",
+      startTime: "3:00",
     },
     {
       eventName: "Interview Chat",
       interviewStatus: "Rescheduled",
       interviewType: "Online",
-      dataStart: "Jun 202022",
-      startTime: "3:00PM",
+      dataStart: "Jun 20 2022",
+      startTime: "3:00",
+    },
+    {
+      eventName: "Tutorial Chat",
+      interviewStatus: "Rescheduled",
+      interviewType: "Online",
+      dataStart: "Jun 07 2022",
+      startTime: "3:00",
     },
     {
       eventName: "Interview",
       interviewStatus: "Available",
       interviewType: "Online",
       dataStart: "Jun 20 2022",
-      startTime: "3:00PM",
+      startTime: "3:00",
+    },
+    {
+      eventName: "Interview",
+      interviewStatus: "Available",
+      interviewType: "Online",
+      dataStart: "Jun 19 2022",
+      startTime: "3:00",
+    },
+    {
+      eventName: "Interview",
+      interviewStatus: "Confirmed",
+      interviewType: "Phone",
+      dataStart: "Jun 25 2022",
+      startTime: "3:00",
     },
     {
       eventName: "Meeting",
       interviewStatus: "Rescheduled",
       interviewType: "Online",
       dataStart: "Jun 15 2022",
-      startTime: "3:00PM",
+      startTime: "3:00",
+    },
+    {
+      eventName: "standup up",
+      interviewStatus: "Rescheduled",
+      interviewType: "Online",
+      dataStart: "Jun 11 2022",
+      startTime: "3:00",
     },
     {
       eventName: "Meetings",
       interviewStatus: "Rescheduled",
       interviewType: "Online",
       dataStart: "Jun 15 2022",
-      startTime: "3:00PM",
+      startTime: "3:00",
+    },
+    {
+      eventName: "Instant Meeting",
+      interviewStatus: "Confirmed",
+      interviewType: "Online",
+      dataStart: "Jun 05 2022",
+      startTime: "3:00",
+    },
+    {
+      eventName: "Fixing Bug",
+      interviewStatus: "Confirmed",
+      interviewType: "In Person",
+      dataStart: "Jun 29 2022",
+      startTime: "3:00",
+    },
+    {
+      eventName: "Project Management Meeting",
+      interviewStatus: "Confirmed",
+      interviewType: "In Person",
+      dataStart: "Jun 09 2022",
+      startTime: "3:00",
+    },
+    {
+      eventName: "Project Management Meeting",
+      interviewStatus: "Confirmed",
+      interviewType: "Phone",
+      dataStart: "Jun 01 2022",
+      startTime: "3:00",
     },
   ]);
   const localDate = new Date();
@@ -145,7 +222,6 @@ function Calendar() {
 
   const allCheck = () => {
     setAllCon(!allCon);
-
     if (allCon) {
       setAll("All");
       setCom("Confirmed");
@@ -332,10 +408,10 @@ function Calendar() {
                       defaultChecked={allCon}
                       value={all}
                       onChange={() => {
-                        window.alert(
-                          "If you uncheck this checkbox they well be anything to filter"
-                        );
                         allCheck();
+                        alert(
+                          "By unchecking this checkbox they well be anything to filter"
+                        );
                       }}
                     />
                     <label htmlFor="all">All</label>
@@ -347,6 +423,7 @@ function Calendar() {
                       className={calendarStyles.lager}
                       defaultChecked={allCon}
                       value={com}
+                      disabled={allCon}
                       onChange={confirmedCheck}
                     />
                     <div className={calendarStyles.konkonlo}></div>
