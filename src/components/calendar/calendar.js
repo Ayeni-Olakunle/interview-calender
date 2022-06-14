@@ -7,8 +7,19 @@ import { RiComputerLine } from "react-icons/ri";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import { Button, Modal, Form, Row, Col } from "react-bootstrap";
 
 function Calendar() {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [show1, setShow1] = useState(false);
+  const [currentDex, setCurrentDex] = useState(0);
+  const handleClose1 = () => setShow1(false);
+  const handleShow1 = (index) => {
+    setShow1(true);
+    setCurrentDex(index);
+  };
   const [toogle1, setToogle1] = useState(false);
   const [toogle2, setToogle2] = useState(false);
   const [toogle3, setToogle3] = useState(false);
@@ -32,8 +43,59 @@ function Calendar() {
   const [online, setOnline] = useState("");
   const [onlineCom, setOnlineCom] = useState(false);
   // Type End
+  // Create Start
+  const [EventForm, setEventForm] = useState();
+  const [statusForm, setStatusForm] = useState();
+  const [typeForm, setTypeForm] = useState();
+  const [dateForm, setDateForm] = useState();
+  const [timeForm, setTimeForm] = useState();
+  // Create End
   const [month, setMonth] = useState(5);
   const [year, setYear] = useState(2022);
+  const [event, setEvent] = useState([
+    {
+      eventName: "Meeting",
+      interviewStatus: "Confirmed",
+      interviewType: "In Person",
+      dataStart: "Jun 12 2022",
+      startTime: "3:00PM",
+    },
+    {
+      eventName: "Stand Up",
+      interviewStatus: "Pending",
+      interviewType: "Phone",
+      dataStart: "Jun 17 2022",
+      startTime: "3:00PM",
+    },
+    {
+      eventName: "Interview Chat",
+      interviewStatus: "Rescheduled",
+      interviewType: "Online",
+      dataStart: "Jun 202022",
+      startTime: "3:00PM",
+    },
+    {
+      eventName: "Interview",
+      interviewStatus: "Available",
+      interviewType: "Online",
+      dataStart: "Jun 20 2022",
+      startTime: "3:00PM",
+    },
+    {
+      eventName: "Meeting",
+      interviewStatus: "Rescheduled",
+      interviewType: "Online",
+      dataStart: "Jun 15 2022",
+      startTime: "3:00PM",
+    },
+    {
+      eventName: "Meetings",
+      interviewStatus: "Rescheduled",
+      interviewType: "Online",
+      dataStart: "Jun 15 2022",
+      startTime: "3:00PM",
+    },
+  ]);
   const localDate = new Date();
   let monthWords = [
     "January",
@@ -52,57 +114,6 @@ function Calendar() {
   let weekWords = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   let weekWordse = ["M", "T", "W", "T", "F", "S", "S"];
 
-  let event = [
-    {
-      id: "1",
-      eventName: "Meeting",
-      interviewStatus: "Confirmed",
-      interviewType: "In Person",
-      dataStart: "Jun 12",
-      startTime: "3:00PM",
-    },
-    {
-      id: "2",
-      eventName: "Stand Up",
-      interviewStatus: "Pending",
-      interviewType: "Phone",
-      dataStart: "Jun 17",
-      startTime: "3:00PM",
-    },
-    {
-      id: "3",
-      eventName: "Interview Chat",
-      interviewStatus: "Rescheduled",
-      interviewType: "Online",
-      dataStart: "Jun 20",
-      startTime: "3:00PM",
-    },
-    {
-      id: "4",
-      eventName: "Interview",
-      interviewStatus: "Available",
-      interviewType: "Online",
-      dataStart: "Jun 20",
-      startTime: "3:00PM",
-    },
-    {
-      id: "5",
-      eventName: "Meeting",
-      interviewStatus: "Rescheduled",
-      interviewType: "Online",
-      dataStart: "Jun 15",
-      startTime: "3:00PM",
-    },
-    {
-      id: "6",
-      eventName: "Meetings",
-      interviewStatus: "Rescheduled",
-      interviewType: "Online",
-      dataStart: "Jul 15",
-      startTime: "3:00PM",
-    },
-  ];
-
   const changeToogle = () => {
     setToogle1(!toogle1);
   };
@@ -115,16 +126,26 @@ function Calendar() {
 
   const monthPlus = () => {
     setMonth(month + 1);
+    if (month === 11) {
+      setYear(year + 1);
+      setMonth(0);
+    }
   };
   const monthMius = () => {
     setMonth(month - 1);
+    if (month === 0) {
+      setYear(year - 1);
+      setMonth(11);
+    }
   };
   const todayMonth = () => {
     setMonth(localDate.getMonth());
+    setYear(localDate.getFullYear());
   };
 
   const allCheck = () => {
     setAllCon(!allCon);
+
     if (allCon) {
       setAll("All");
       setCom("Confirmed");
@@ -225,24 +246,6 @@ function Calendar() {
     }
   };
 
-  // const phoneTypeCheck = () => {
-  //   setPhoneCom(!phoneCom);
-  //   if (phoneCom) {
-  //     setPhone("Phone");
-  //   } else {
-  //     setPhone("");
-  //   }
-  // };
-
-  // const onlineTypeCheck = () => {
-  //   setOnlineCom(!onlineCom);
-  //   if (onlineCom) {
-  //     setOnline("Online");
-  //   } else {
-  //     setOnline("");
-  //   }
-  // };
-
   function getDaysInMonthUTC(month, year) {
     var date = new Date(Date.UTC(year, month, 1));
     var days = [];
@@ -252,6 +255,33 @@ function Calendar() {
     }
     return days;
   }
+
+  function addEvent(e) {
+    e.preventDefault();
+    let yyyy = dateForm.toString().slice(0, 4);
+    let mmmm = monthWords[
+      dateForm.toString().slice(5, 7).replace(/^0+/, "") - 1
+    ]
+      .toString()
+      .slice(0, 3);
+    let dddd = dateForm.toString().slice(8, 10);
+
+    handleClose();
+    const holdFormDetails = {
+      eventName: EventForm,
+      interviewStatus: statusForm,
+      interviewType: typeForm,
+      dataStart: `${mmmm} ${dddd} ${yyyy}`,
+      startTime: timeForm,
+    };
+    setEvent([...event, holdFormDetails]);
+    console.log(holdFormDetails);
+    setEventForm("");
+    setStatusForm("");
+    setTypeForm("");
+    setDateForm("");
+    setTimeForm("");
+  }
   const completeMonth = getDaysInMonthUTC(month, year);
   return (
     <div className={calendarStyles.holdAll}>
@@ -259,7 +289,7 @@ function Calendar() {
       <div className={calendarStyles.holdBox}>
         <div className={calendarStyles.holdSmall}>
           <div className={calendarStyles.create}>
-            <div className={calendarStyles.createButin}>
+            <div className={calendarStyles.createButin} onClick={handleShow}>
               <AiOutlinePlusCircle />
               Create
               <MdArrowDropDown style={{ fontSize: "20px" }} />
@@ -301,7 +331,12 @@ function Calendar() {
                       className={calendarStyles.lager}
                       defaultChecked={allCon}
                       value={all}
-                      onChange={allCheck}
+                      onChange={() => {
+                        window.alert(
+                          "If you uncheck this checkbox they well be anything to filter"
+                        );
+                        allCheck();
+                      }}
                     />
                     <label htmlFor="all">All</label>
                   </div>
@@ -373,7 +408,7 @@ function Calendar() {
                       className={calendarStyles.lager}
                       defaultChecked={true}
                       value={allTypes}
-                      ocChange={allType}
+                      onChange={allType}
                     />
                     <label htmlFor="allMobile">All</label>
                   </div>
@@ -437,18 +472,18 @@ function Calendar() {
                   Today
                 </button>
                 <div className={calendarStyles.greaterThan}>
-                  <span
+                  <button
                     className={calendarStyles.greaterTwo}
                     onClick={monthMius}
                   >
-                    {month === 0 || month < 0 ? "" : "<"}
-                  </span>
-                  <span
+                    {"<"}
+                  </button>
+                  <button
                     className={calendarStyles.greaterTwo2}
                     onClick={monthPlus}
                   >
-                    {month === 11 || month > 11 ? "" : ">"}
-                  </span>
+                    {">"}
+                  </button>
                 </div>
                 <span
                   className={calendarStyles.calendarName}
@@ -582,6 +617,9 @@ function Calendar() {
                 {completeMonth.map((item, index) => {
                   const day = item.toString().slice(8, 10);
                   const MonthFor = item.toString().slice(4, 10);
+                  const YearFor = item.toString().slice(11, 15);
+                  const combine = MonthFor + " " + YearFor;
+                  console.log(combine);
                   return (
                     <Fragment>
                       <div className={calendarStyles.griditem} key={index}>
@@ -602,30 +640,55 @@ function Calendar() {
                                 type.interviewType === online
                             )
                             .map((detail, i) => {
-                              if (MonthFor.includes(detail.dataStart)) {
+                              if (combine.includes(detail.dataStart)) {
                                 return (
                                   <div
                                     className={`${detail.interviewStatus}`}
                                     index={i}
+                                    onClick={() => {
+                                      handleShow1(i);
+                                    }}
                                   >
                                     {detail.interviewType.includes(
                                       "In Person"
                                     ) ? (
-                                      <BsPerson />
+                                      <span>
+                                        <BsPerson
+                                          style={{
+                                            fontSize: "20px",
+                                            marginRight: "4px",
+                                          }}
+                                        />
+                                      </span>
                                     ) : (
                                       ""
                                     )}
                                     {detail.interviewType.includes("Phone") ? (
-                                      <MdSmartphone />
+                                      <span>
+                                        <MdSmartphone
+                                          style={{
+                                            fontSize: "20px",
+                                            marginRight: "4px",
+                                          }}
+                                        />
+                                      </span>
                                     ) : (
                                       ""
                                     )}
                                     {detail.interviewType.includes("Online") ? (
-                                      <RiComputerLine />
+                                      <span>
+                                        <RiComputerLine
+                                          style={{
+                                            fontSize: "20px",
+                                            marginRight: "4px",
+                                          }}
+                                        />
+                                      </span>
                                     ) : (
                                       ""
                                     )}
                                     {detail.eventName}
+                                    <div>wewef</div>
                                   </div>
                                 );
                               }
@@ -640,6 +703,100 @@ function Calendar() {
           </div>
         </div>
         {/* Calendar End */}
+        {/* Create Eevent Start */}
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Create New Interview</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form onSubmit={addEvent}>
+              <Form.Group className="mb-3" controlId="formBasicEvent">
+                <Form.Label>Event</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Event"
+                  onChange={(e) => setEventForm(e.target.value)}
+                  required
+                />
+              </Form.Group>
+
+              <Form.Group className="mb-3">
+                <Form.Label>Event Status</Form.Label>
+                <Form.Select
+                  onChange={(e) => setStatusForm(e.target.value)}
+                  required
+                >
+                  <option></option>
+                  <option>Confirmed</option>
+                  <option>Pendind</option>
+                  <option>Rescheduled</option>
+                  <option>Available</option>
+                </Form.Select>
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Interview Type</Form.Label>
+                <Form.Select
+                  onChange={(e) => setTypeForm(e.target.value)}
+                  required
+                >
+                  <option></option>
+                  <option>In Person</option>
+                  <option>Phone</option>
+                  <option>Online</option>
+                </Form.Select>
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicTime">
+                <Row>
+                  <Col>
+                    <Form.Group className="mb-3" controlId="formBasicTime">
+                      <Form.Label>Date</Form.Label>
+                      <Form.Control
+                        type="Date"
+                        placeholder="Date"
+                        onChange={(e) => setDateForm(e.target.value)}
+                        min={new Date().toISOString().split("T")[0]}
+                        required
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col>
+                    <Form.Group className="mb-3" controlId="formBasicTime">
+                      <Form.Label>Time</Form.Label>
+                      <Form.Control
+                        type="time"
+                        placeholder="time"
+                        onChange={(e) => setTimeForm(e.target.value)}
+                        required
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
+              </Form.Group>
+
+              <Button variant="primary" type="submit">
+                Submit
+              </Button>
+            </Form>
+          </Modal.Body>
+        </Modal>
+        {/* Create Eevent End */}
+        {/* Detail Start */}
+        <Modal show={show1} onHide={handleClose1}>
+          <Modal.Header closeButton>
+            <Modal.Title>Interview Details</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div>
+              <p>Event Name: {event[currentDex].eventName}</p>
+              <p>Event Status: {event[currentDex].interviewStatus}</p>
+              <p>Event Type: {event[currentDex].interviewType}</p>
+              <p>Event Date: {event[currentDex].dataStart}</p>
+              <p>Event Time: {event[currentDex].startTime}</p>
+            </div>
+          </Modal.Body>
+        </Modal>
+        {/* Detail End */}
       </div>
     </div>
   );

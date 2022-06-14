@@ -10,6 +10,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .Pending {
   width: 100%;
@@ -23,6 +26,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .Rescheduled {
   width: 100%;
@@ -36,6 +42,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .Available {
   width: 100%;
@@ -49,4 +58,28 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: salmon !important;
+  border-color: rgba(250, 128, 114, 0.372) !important;
+  width: 100%;
+}
+
+.form-control:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: rgba(250, 128, 114, 0.372) !important;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(250, 128, 114, 0.185) !important;
+}
+
+.form-select:focus {
+  border-color: rgba(250, 128, 114, 0.185) !important;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(250, 128, 114, 0.185) !important;
 }
