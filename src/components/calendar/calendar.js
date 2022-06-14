@@ -140,7 +140,6 @@ function Calendar() {
 
   const confirmedCheck = () => {
     setConfirCon(!confirCon);
-
     if (confirCon) {
       setCom("Confirmed");
     } else {
@@ -322,7 +321,6 @@ function Calendar() {
                       name="Inperson"
                       className={calendarStyles.lager}
                       value="Inperson"
-                      onChange={inPersonTypeCheck}
                     />
                     <BsPerson
                       style={{ marginRight: "5px", fontSize: "20px" }}
@@ -526,8 +524,13 @@ function Calendar() {
                                 person.interviewStatus === com ||
                                 person.interviewStatus === pen ||
                                 person.interviewStatus === res ||
-                                person.interviewStatus === avail ||
-                                person.interviewType === inPerson
+                                person.interviewStatus === avail
+                            )
+                            .filter(
+                              (type) =>
+                                type.interviewType === "In Person" ||
+                                type.interviewType === "Phone" ||
+                                type.interviewType === "Online"
                             )
                             .map((detail, i) => {
                               if (MonthFor.includes(detail.dataStart)) {
