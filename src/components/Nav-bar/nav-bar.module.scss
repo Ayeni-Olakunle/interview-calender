@@ -1,0 +1,25 @@
+.holdNav {
+  margin-top: 4em;
+  .unorderedList {
+    list-style: none;
+    height: 100%;
+    background-color: white;
+    padding: 0;
+
+    .holdIcon {
+      padding: 17px 1em;
+      font-size: 23px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: gray;
+      border-left: 4px solid transparent;
+    }
+
+    .active {
+      border-left: 4px solid salmon;
+      color: salmon;
+      background-color: #de8b8c17;
+    }
+  }
+}

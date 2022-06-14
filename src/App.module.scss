@@ -1,0 +1,55 @@
+.App {
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.smallContainer {
+  width: 6%;
+  height: 90vh;
+}
+.bigContainer {
+  width: 94%;
+  height: 90vh;
+  background-color: #de8b8c17;
+  // padding: 2em 0;
+  overflow-y: scroll;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 2px;
+  border-radius: 50px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: salmon;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: salmon;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

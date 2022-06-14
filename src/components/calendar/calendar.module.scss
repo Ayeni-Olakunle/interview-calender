@@ -1,0 +1,210 @@
+.holdAll {
+  height: 100%;
+  padding: 1em 4em;
+
+  .InterviewCalendar {
+    text-align: left;
+    margin: 0;
+  }
+  .holdBox {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 3em 0;
+
+    .holdSmall {
+      width: 25%;
+      height: 100%;
+      border-radius: 5px;
+
+      .create {
+        padding: 2em 2em;
+        height: auto;
+        background-color: white;
+
+        .createButin {
+          background-color: #a4acf3;
+          padding: 20px;
+          margin: 0 1em;
+          border-radius: 50px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-weight: bold;
+          cursor: pointer;
+          margin-bottom: 40px;
+        }
+        .calendars {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-weight: bold;
+          cursor: pointer;
+          margin-top: 2em;
+          font-size: 18px;
+        }
+        .thuglu {
+          height: 0;
+          overflow: hidden;
+        }
+        .AdminCalendars {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-top: 20px;
+
+          .colo {
+            color: salmon !important;
+          }
+        }
+        .InterviewStatus {
+          display: flex;
+          justify-content: flex-start;
+          flex-direction: column;
+          align-items: flex-start;
+          margin-top: 20px;
+
+          .confirm {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin: 10px 0;
+
+            .konkonlo {
+              width: 12px;
+              height: 12px;
+              background-color: green;
+              margin-right: 10px;
+              border-radius: 50%;
+            }
+            .pending {
+              width: 12px;
+              height: 12px;
+              background-color: orange;
+              margin-right: 10px;
+              border-radius: 50%;
+            }
+            .rescheduled {
+              width: 12px;
+              height: 12px;
+              background-color: rgba(0, 81, 255, 0.66);
+              margin-right: 10px;
+              border-radius: 50%;
+            }
+            .available {
+              width: 12px;
+              height: 12px;
+              background-color: gray;
+              margin-right: 10px;
+              border-radius: 50%;
+            }
+          }
+        }
+      }
+    }
+    .holdBig {
+      width: 70%;
+      height: 100%;
+      background-color: white;
+      border-radius: 5px;
+
+      .holdBig2 {
+        padding: 2em;
+
+        .dateNext {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .today {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .todayButin {
+              padding: 10px 30px;
+              border: 2px solid #e4e4e4;
+              color: gray;
+              border-radius: 5px;
+              background-color: white;
+              outline: none;
+              font-size: 15px;
+              cursor: pointer;
+            }
+
+            .greaterThan {
+              margin: 0 20px;
+              font-size: 28px;
+
+              .greaterTwo {
+                font-weight: bold;
+                color: #1565c0;
+                margin-right: 20px;
+                cursor: pointer;
+              }
+              .greaterTwo2 {
+                font-weight: bold;
+                color: #1565c0;
+                cursor: pointer;
+              }
+            }
+          }
+
+          .selecter {
+            padding: 10px;
+            border: 2px solid #e4e4e4;
+            color: gray;
+            border-radius: 5px;
+            outline: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+input.lager {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  outline-offset: -2px;
+}
+
+.gridcontainer {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  background-color: white;
+}
+.griditem {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid lightgray;
+  height: 100px;
+  padding: 0 10px;
+  font-size: 10px;
+  text-align: center;
+  overflow-y: scroll;
+}
+.gridcontainers {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  background-color: white;
+  margin-top: 2em;
+}
+.griditems {
+  background-color: rgba(255, 255, 255, 0.8);
+  font-size: 10px;
+  text-align: center;
+  text-align: left;
+}
+.calendarName {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.dayMe {
+  text-align: left;
+  margin-top: 8px;
+}

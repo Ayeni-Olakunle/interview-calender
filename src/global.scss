@@ -1,0 +1,52 @@
+.Confirmed {
+  width: 100%;
+  height: auto;
+  background-color: green;
+  color: white;
+  font-size: 15px;
+  padding: 2px;
+  border-radius: 5px;
+  margin-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.Pending {
+  width: 100%;
+  height: auto;
+  background-color: orange;
+  color: white;
+  font-size: 15px;
+  padding: 2px;
+  border-radius: 5px;
+  margin-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.Rescheduled {
+  width: 100%;
+  height: auto;
+  background-color: #1565c0;
+  color: white;
+  font-size: 15px;
+  padding: 2px;
+  border-radius: 5px;
+  margin-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.Available {
+  width: 100%;
+  height: auto;
+  background-color: gray;
+  color: white;
+  font-size: 15px;
+  padding: 2px;
+  border-radius: 5px;
+  margin-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
