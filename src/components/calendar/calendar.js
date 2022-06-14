@@ -228,14 +228,12 @@ function Calendar() {
       setPen("Pending");
       setRes("Rescheduled");
       setAvail("Available");
-      setInPerson("In Person");
     } else {
       setAll("");
       setCom("");
       setPen("");
       setRes("");
       setAvail("");
-      setInPerson("");
     }
   };
 
@@ -267,7 +265,6 @@ function Calendar() {
       setCom("");
     }
   };
-
   const pendingCheck = () => {
     setPenCom(!penCom);
     if (penCom) {
@@ -492,7 +489,7 @@ function Calendar() {
                   <div className={calendarStyles.confirm}>
                     <input
                       type="checkbox"
-                      name="Inperson"
+                      name="In Person"
                       defaultChecked={true}
                       className={calendarStyles.lager}
                       value={inPerson}
@@ -699,7 +696,6 @@ function Calendar() {
                   const MonthFor = item.toString().slice(4, 10);
                   const YearFor = item.toString().slice(11, 15);
                   const combine = MonthFor + " " + YearFor;
-                  console.log(combine);
                   return (
                     <Fragment>
                       <div className={calendarStyles.griditem} key={index}>
@@ -768,7 +764,6 @@ function Calendar() {
                                       ""
                                     )}
                                     {detail.eventName}
-                                    <div>wewef</div>
                                   </div>
                                 );
                               }
